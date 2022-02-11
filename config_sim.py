@@ -13,15 +13,16 @@ NAME = 'spectrum'
 VERSION = '01'
 NAME += '_v' + VERSION
 
-MODEL = 'chem_equ'  # 'free' or 'chem_equ'
+MODEL = 'free'  # 'free' or 'chem_equ'
 OUTPUT_FORMAT = 'datalike'  # determines whether output has same bins as data ('datalike') or if it still contains its extensions
 INSTRUMENT = 'SINFONI'
 
 USE_PRIOR = None
 
-IPAGATE_ROUTE = '/home/ipa/quanz/user_accounts/'
+USER = 'jhayoz'
+IPAGATE_ROUTE = '/home/ipa/quanz/user_accounts/' + USER + '/'
 
-OUTPUT_DIR = IPAGATE_ROUTE + ''
+OUTPUT_DIR = IPAGATE_ROUTE + '/Student_projects'
 OUTPUT_DIR += NAME
 
 # where to get data from to make synthetic data
@@ -47,8 +48,8 @@ WLEN_BORDERS = [2.0880364682002703, 2.4506398060442036]
 WLEN_BORDERS = [0.8, 5]
 EXTENSIONS = None
 
-# ABUNDANCES = ['H2O_main_iso','CH4_main_iso', 'CO_main_iso', 'CO2_main_iso']
-ABUNDANCES = ['C/O', 'FeHs']
+ABUNDANCES = ['H2O_main_iso']
+#ABUNDANCES = ['C/O', 'FeHs']
 
 pc_to_m = 3.086 * 1e16
 distance_pc = 19.7538
@@ -73,12 +74,15 @@ CLOUDS_PARAMS['log_Pcloud']     = np.log10(0.5)
 """
 
 AB_METALS = {}
-# AB_METALS['H2O_main_iso']   = -2.4
+# free
+AB_METALS['H2O_main_iso']   = -2.4
 # AB_METALS['CO_main_iso']    = -3.3
 # AB_METALS['CH4_main_iso']   = -4.5
 # AB_METALS['CO2_main_iso']   = -4.2
-AB_METALS['C/O'] = 1
-AB_METALS['FeHs'] = 0.66
+
+# chem_equ
+#AB_METALS['C/O'] = 1
+#AB_METALS['FeHs'] = 0.66
 
 PHYSICAL_PARAMS = {}
 # PHYSICAL_PARAMS['rot_vel'] = 25
