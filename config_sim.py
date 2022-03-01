@@ -24,6 +24,7 @@ IPAGATE_ROUTE = '/home/ipa/quanz/user_accounts/' + USER + '/'
 
 OUTPUT_DIR = IPAGATE_ROUTE + '/Student_projects'
 OUTPUT_DIR += NAME
+OUTPUT_DIR = '/home/jhayoz/Projects/student_project/fabian/' + NAME
 
 # where to get data from to make synthetic data
 INPUT_FILE = IPAGATE_ROUTE + ''
