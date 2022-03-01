@@ -93,7 +93,7 @@ for key in instruments.keys():
     # remove continuum with filter
     wlen_after = None
     if OUTPUT_FORMAT == 'datalike':
-        wlen_after = CC_wlen_data[key]
+        wlen_after = instruments[key]
     CC_wlen_removed[key], CC_flux_removed[key], sgfilter[key] = only_gaussian_filter(CC_wlen_rebin[key],
                                                                                      CC_flux_rebin[key],
                                                                                      sigma=WINDOW_LENGTH_LBL,
