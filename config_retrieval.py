@@ -75,7 +75,7 @@ UNSEARCHED_ABUNDS = []
 
 
 ALL_TEMPS = ['log_gamma', 't_int', 't_equ', 'log_gravity', 'log_kappa_IR', 'R', 'P0']
-TEMP_PARAMS = ['t_equ', 'log_gravity', 'R'
+TEMP_PARAMS = ['t_equ',
                    ]  # Pick from ALL_TEMPS, and order is relevant: must be like in ALL_TEMPS
 
 UNSEARCHED_TEMPS = [item for item in ALL_TEMPS if not (item in TEMP_PARAMS)]
