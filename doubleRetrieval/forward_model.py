@@ -37,7 +37,7 @@ class ForwardModel:
                  clouds = None,
                  cloud_species = [],
                  do_scat_emis = False,
-                 model = 'free', # can be 'free' or 'chem_equ'
+                 chem_model = 'free', # can be 'free' or 'chem_equ'
                  max_RV = 1000.,
                  max_winlen = 201,
                  include_H2 = True,
@@ -58,7 +58,7 @@ class ForwardModel:
             # if clouds = 'ackermann'
             self.cloud_species = cloud_species
             self.do_scat_emis = True
-        self.model = model
+        self.model = chem_model
         self.max_RV = max_RV
         self.max_winlen = max_winlen
         
@@ -156,6 +156,8 @@ class ForwardModel:
         
         # translate ab_metals dictionary if we're using c-k mode
         if self.mode == 'c-k':
+            # example: if mol = 'H2O_main_iso', then name_ck(mol) = 'H2O'
+            # so it changes ab_metals = {'H2O_main_iso':obj} to ab_metals = {'H2O':obj}
             ab_metals_ck = {name_ck(mol):ab_metals[mol] for mol in ab_metals.keys()}
             ab_metals = ab_metals_ck
         
@@ -170,7 +172,7 @@ class ForwardModel:
                 clouds_params,
                 mode=self.mode,
                 contribution = contribution)
-        else:
+        elif self.model == 'chem_equ':
             # 'chem_equ'
             wlen, flux, abundances = retrieval_model_chem_disequ(
                 self.rt_obj,
@@ -181,6 +183,15 @@ class ForwardModel:
                 contribution = contribution,
                 only_include = self.only_include,
                 set_mol_abund = set_mol_abund)
+        else:
+            wlen, flux, abundances = calc_flux_from_model(
+                self.rt_obj,
+                temp_params,
+                chem_model=self.model,
+                chem_params=ab_metals,
+                clouds_params=clouds_params,
+                mode=self.mode,
+                contribution=contribution)
             
             if self.only_include != 'all':
                 assert(len(abundances.keys())==len(self.only_include)+2)

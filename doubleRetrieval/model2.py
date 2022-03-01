@@ -74,7 +74,7 @@ def calc_flux_from_model(
 
     if chem_model == 'chem_equ':
         abundances = calc_chem_equ_abundances(chem_params, pressures,temperatures, mode=mode)
-    elif chem_model == 'vert_const':
+    elif chem_model == 'free':
         abundances = calc_vert_const_abundances(chem_params,pressures,temperatures,mode=mode)
     elif chem_model == 'fabian':
         abundances = calc_fabian_model(chem_params, pressures,temperatures, mode=mode)
@@ -103,24 +103,9 @@ def retrieval_model_initial(
     
     # Forward model
     # Outputs the spectrum given by the chosen parameters
-    
-    
-    abundances = {}
-    metal_sum = 0
-    for name in ab_metals.keys():
-        abundances[name] = np.ones_like(pressures)*1e1**ab_metals[name]
-        metal_sum += 1e1**ab_metals[name]
-    
-    abH2He = 1. - metal_sum
-    
-    if mode == 'lbl':
-        abundances['H2_main_iso'] = abH2He*0.75 * np.ones_like(temperatures)
-        abundances['H2'] = abH2He*0.75 * np.ones_like(temperatures)
-    else:
-        abundances['H2'] = abH2He*0.75 * np.ones_like(temperatures)
-    
-    abundances['He'] = abH2He*0.25 * np.ones_like(temperatures)
-    
+
+    abundances = calc_vert_const_abundances(ab_metals, pressures, temperatures, mode=mode)
+
     wlen,flux,abundances = rt_obj_calc_flux(rt_object,
                              temperatures,
                              abundances,
