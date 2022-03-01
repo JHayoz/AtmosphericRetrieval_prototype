@@ -53,7 +53,7 @@ forwardmodel_lbl = ForwardModel(
     max_wlen_stepsize=stepsize,
     mode='lbl',
     line_opacities=ABUNDANCES,
-    model=MODEL,
+    chem_model=MODEL,
     max_RV=0,
     max_winlen=WINDOW_LENGTH_LBL
 )

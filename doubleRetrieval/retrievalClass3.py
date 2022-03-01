@@ -106,7 +106,7 @@ class Retrieval:
                  max_wlen_stepsize = wlen_borders_ck[1]/1000,
                  mode = 'c-k',
                  line_opacities = self.config['ABUNDANCES'] + self.config['UNSEARCHED_ABUNDANCES'],
-                 model = self.model,
+                 chem_model = self.model,
                  max_RV = 0,
                  max_winlen = 0
                  )
@@ -125,7 +125,7 @@ class Retrieval:
                      max_wlen_stepsize = max_wlen_stepsize,
                      mode = 'lbl',
                      line_opacities = self.config['ABUNDANCES'] + self.config['UNSEARCHED_ABUNDANCES'],
-                     model = self.model,
+                     chem_model = self.model,
                      max_RV = 2*max(abs(self.config['RVMIN']),self.config['RVMAX']),
                      max_winlen = int(1.5*self.config['WIN_LEN'])
                      )
