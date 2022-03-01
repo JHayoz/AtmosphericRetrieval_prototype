@@ -20,7 +20,8 @@ INSTRUMENT = 'SINFONI'
 USE_PRIOR = None
 
 USER = 'jhayoz'
-IPAGATE_ROUTE = '/home/ipa/quanz/user_accounts/' + USER + '/'
+USER_FOLDER = '/Projects/student_project/fabian/'
+IPAGATE_ROUTE = '/home/' + USER + USER_FOLDER
 
 OUTPUT_DIR = IPAGATE_ROUTE + '/Student_projects'
 OUTPUT_DIR += NAME

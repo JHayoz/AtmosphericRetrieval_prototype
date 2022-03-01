@@ -14,17 +14,20 @@ MODEL = 'chem_equ'  # 'free' or 'chem_equ'
 MACHINE = 'bluesky'
 
 NUMBER = ''
-RETRIEVAL_NAME_INPUT = 'retrieval'
+RETRIEVAL_NAME_INPUT = 'spectrum_v01'
 VERSION = '01'
 if MODEL == 'free':
     VERSION += '_free'
-RETRIEVAL_NAME = RETRIEVAL_NAME_INPUT
+RETRIEVAL_NAME = 'first_retrieval'
 # configure the paths of the input and output files
-IPAGATE_ROUTE = '/home/ipa/quanz/user_accounts/'
-INPUT_DIR = IPAGATE_ROUTE + '' + RETRIEVAL_NAME_INPUT
+
+USER = 'jhayoz'
+USER_FOLDER = '/Projects/student_project/fabian/'
+IPAGATE_ROUTE = '/home/' + USER + USER_FOLDER
+INPUT_DIR = IPAGATE_ROUTE + RETRIEVAL_NAME_INPUT
 
 OUTPUT_DIR = '/scratch/'
-OUTPUT_DIR += '' + RETRIEVAL_NAME + '_' + VERSION + '/'
+OUTPUT_DIR += RETRIEVAL_NAME + '_' + VERSION + '/'
 
 SIM_DATA_DIR = INPUT_DIR
 CC_DATA_FILE = INPUT_DIR + '/CC_spectrum'
