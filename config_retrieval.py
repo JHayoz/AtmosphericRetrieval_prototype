@@ -10,7 +10,7 @@ from doubleRetrieval.util import a_b_range, uniform_prior, gaussian_prior, log_g
     poor_mans_abunds_ck, open_spectrum
 
 
-MODEL = 'chem_equ'  # 'free' or 'chem_equ'
+MODEL = 'free'  # 'free' or 'chem_equ'
 MACHINE = 'bluesky'
 
 NUMBER = ''
