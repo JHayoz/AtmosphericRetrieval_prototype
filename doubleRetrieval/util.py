@@ -26,8 +26,6 @@ from scipy.stats import truncnorm,skewnorm,gaussian_kde,norm
 from scipy.optimize import curve_fit
 
 
-import forecaster
-from forecaster import mr_forecast as mr
 from itertools import product
 
 
@@ -771,46 +769,6 @@ def calc_SNR(dRV,CC):
     SNR = CC_max/std_CC
     return SNR,std_CC,RV_max_i,left_bord,right_bord,noisy_CC_function
 
-
-def predict_RM_distr(mu,std,predict='radius',classify=False,N_picks = 1000,return_input = False):
-    if classify:
-        classify = 'Yes'
-    else:
-        classify = 'No'
-    if predict == 'radius':
-        mearth2mjup = 317.828
-        mlower = 3e-4/mearth2mjup
-        mupper = 3e5/mearth2mjup
-        sample = truncnorm.rvs( (mlower-mu)/std, (mupper-mu)/std, loc=mu, scale=std, size=N_picks)
-    else:
-        rearth2rjup = 11.21
-        rlower = 1e-1/rearth2rjup
-        rupper = 1e2/rearth2rjup
-        sample = truncnorm.rvs( (rlower-mu)/std, (rupper-mu)/std, loc=mu, scale=std, size=N_picks)
-    
-    if predict == 'radius':
-        print('forecasting radius')
-        quantity_sample = mr.Mpost2R(sample,unit='Jupiter',classify = classify)
-    else:
-        print('forecasting mass')
-        quantity_sample = mr.Rpost2M(sample,unit='Jupiter',classify = classify)
-    
-    if return_input:
-        return quantity_sample,sample
-    else:
-        return quantity_sample
-
-def predict_g_distr(M_sample,R_sample,N_picks = 1000):
-    if N_picks == 'all':
-        values = product(np.log10(M_sample),np.log10(R_sample))
-    else:
-        log_M_picks = np.log10(np.random.choice(M_sample,N_picks))
-        log_R_picks = np.log10(np.random.choice(R_sample,N_picks))
-        values = zip(log_M_picks,log_R_picks)
-    gravity_cgs_si = 100
-    log_g_sample = np.array([np.log10(cst.gravitational_constant) + log_M + np.log10(MASS_J) - 2*log_R - 2*np.log10(RADIUS_J) + np.log10(gravity_cgs_si) for log_M,log_R in values])
-    
-    return log_g_sample
 """
 def prior_transform(sample):
 
