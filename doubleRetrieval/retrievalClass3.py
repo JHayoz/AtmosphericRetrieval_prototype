@@ -49,8 +49,6 @@ class Retrieval:
         self.prior_obj = prior_obj
         self.config = config # dictionary, with keys from the config file
         self.model = model
-        self.use_forecaster = config['USE_FORECASTER']
-        self.use_prior = config['USE_PRIOR']
         self.retrieval_name = retrieval_name
         self.output_path = output_path
         self.plotting = plotting
@@ -303,13 +301,7 @@ class Retrieval:
                 temp_params[name] = self.config['DATA_PARAMS'][name]
             if name in self.config['UNSEARCHED_CLOUDS']:
                 clouds_params[name] = self.config['DATA_PARAMS'][name]
-        
-        if self.use_forecaster or self.use_prior == 'M':
-            temp_params['log_gravity'] = np.log10(cst.gravitational_constant) + np.log10(temp_params['M']) + np.log10(MASS_J) - 2*temp_params['log_R'] - 2*np.log10(RADIUS_J) + np.log10(gravity_cgs_si)
-        
-        if self.use_prior == 'R':
-            temp_params['log_R'] = np.log10(temp_params['log_R'])
-        
+
         if 'log_R' not in temp_params.keys() and 'R' in temp_params.keys():
             temp_params['log_R'] = np.log10(temp_params['R'])
         
