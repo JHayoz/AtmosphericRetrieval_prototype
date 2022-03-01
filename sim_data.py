@@ -31,8 +31,8 @@ if not os.path.exists(OUTPUT_DIR):
 import shutil
 
 cwd = os.getcwd()
-source = cwd + '/sim_config2.py'
-destination = OUTPUT_DIR + '/sim_config2_copy.py'
+source = cwd + '/config_sim.py'
+destination = OUTPUT_DIR + '/config_sim.py'
 shutil.copyfile(source, destination)
 print('Config file copied')
 

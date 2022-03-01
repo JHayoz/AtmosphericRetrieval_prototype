@@ -50,8 +50,8 @@ if not os.path.exists(OUTPUT_DIR):
 import shutil
 
 cwd = os.getcwd()
-source = cwd + '/config3.py'
-destination = OUTPUT_DIR + 'config3_copy.py'
+source = cwd + '/config_retrieval.py'
+destination = OUTPUT_DIR + 'config_retrieval.py'
 shutil.copyfile(source, destination)
 print('Config file copied')
 
