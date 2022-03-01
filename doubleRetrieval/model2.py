@@ -60,6 +60,36 @@ def calc_MMW(abundances):
         MMW += abundances[key]/get_MMWs(key)
     return 1./MMW
 
+def calc_flux_from_model(
+        rt_object,
+        temp_params,
+        chem_model,
+        chem_params,
+        clouds_params,
+        mode='lbl',
+        contribution=False):
+    # thermal structure
+    pressures,temperatures = calc_thermal_structure(temp_params)
+
+
+    if chem_model == 'chem_equ':
+        abundances = calc_chem_equ_abundances(chem_params, pressures,temperatures, mode=mode)
+    elif chem_model == 'vert_const':
+        abundances = calc_vert_const_abundances(chem_params,pressures,temperatures,mode=mode)
+    elif chem_model == 'fabian':
+        abundances = calc_fabian_model(chem_params, pressures,temperatures, mode=mode)
+
+
+    wlen, flux, abundances = rt_obj_calc_flux(rt_object,
+                                              temperatures,
+                                              abundances,
+                                              1e1 ** temp_params['log_gravity'],
+                                              clouds_params,
+                                              contribution)
+
+    return wlen, flux, abundances
+
+
 def retrieval_model_initial(
         rt_object,
         pressures,
@@ -180,17 +210,20 @@ def rt_obj_calc_flux(rt_object,
     
     return nc.c/rt_object.freq, rt_object.flux, abundances
 
-def calc_chem_equ_abundances(temp_params,ab_metals,mode='lbl'):
-    
+def calc_thermal_structure(temp_params):
+    # calculate thermal structure
     pressures = np.logspace(-6, temp_params['P0'], 100)
     temperatures = nc.guillot_global(
-                pressures,
-                1e1**temp_params['log_kappa_IR'],
-                1e1**temp_params['log_gamma'],
-                1e1**temp_params['log_gravity'],
-                temp_params['t_int'],
-                temp_params['t_equ'])
-    
+        pressures,
+        1e1 ** temp_params['log_kappa_IR'],
+        1e1 ** temp_params['log_gamma'],
+        1e1 ** temp_params['log_gravity'],
+        temp_params['t_int'],
+        temp_params['t_equ'])
+    return pressures,temperatures
+
+def calc_chem_equ_abundances(ab_metals, pressures,temperatures,mode='lbl'):
+
     COs = ab_metals['C/O']*np.ones_like(pressures)
     FeHs = ab_metals['FeHs']*np.ones_like(pressures)
     
@@ -202,4 +235,29 @@ def calc_chem_equ_abundances(temp_params,ab_metals,mode='lbl'):
     
     abundances = filter_relevant_mass_fractions(mass_fractions,mode)
     
-    return pressures,temperatures,abundances
+    return abundances
+
+def calc_vert_const_abundances(ab_metals, pressures,temperatures,mode='lbl'):
+
+    # calculate profiles for molecular abundances
+    abundances = {}
+    metal_sum = 0
+    for name in ab_metals.keys():
+        abundances[name] = np.ones_like(pressures) * 1e1 ** ab_metals[name]
+        metal_sum += 1e1 ** ab_metals[name]
+
+    abH2He = 1. - metal_sum
+
+    if mode == 'lbl':
+        abundances['H2_main_iso'] = abH2He * 0.75 * np.ones_like(temperatures)
+        abundances['H2'] = abH2He * 0.75 * np.ones_like(temperatures)
+    else:
+        abundances['H2'] = abH2He * 0.75 * np.ones_like(temperatures)
+
+    abundances['He'] = abH2He * 0.25 * np.ones_like(temperatures)
+
+    return abundances
+
+def calc_fabian_model(chem_params, pressures,temperatures,mode='lbl'):
+    abundances = {}
+    return abundances
