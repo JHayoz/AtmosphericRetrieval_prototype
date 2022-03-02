@@ -70,7 +70,7 @@ MOL_ABUNDS_KEYS_CK = poor_mans_abunds_ck()
 MOL_ABUNDS_KEYS_LBL = poor_mans_abunds_lbl()
 
 if MODEL == 'free':
-    ABUNDANCES = ['H2O_main_iso']
+    ABUNDANCES = ['H2O_main_iso','CO_main_iso']
 if MODEL == 'chem_equ':
     ABUNDANCES = ['C/O', 'FeHs']
 
@@ -123,6 +123,7 @@ DATA_PARAMS['log_gravity'] = 4.35
 DATA_PARAMS['P0'] = 2
 
 DATA_PARAMS['H2O_main_iso']   = -2.4
+DATA_PARAMS['CO_main_iso']   = -3.3
 #DATA_PARAMS['C/O'] = 0.44
 #DATA_PARAMS['FeHs'] = 0.66
 

@@ -50,7 +50,7 @@ RESOLUTION = 5000
 WLEN_BORDERS = [1, 3]
 EXTENSIONS = None
 
-ABUNDANCES = ['H2O_main_iso']
+ABUNDANCES = ['H2O_main_iso','CO_main_iso']
 #ABUNDANCES = ['C/O', 'FeHs']
 
 pc_to_m = 3.086 * 1e16
@@ -78,7 +78,7 @@ CLOUDS_PARAMS['log_Pcloud']     = np.log10(0.5)
 AB_METALS = {}
 # free
 AB_METALS['H2O_main_iso']   = -2.4
-# AB_METALS['CO_main_iso']    = -3.3
+AB_METALS['CO_main_iso']    = -3.3
 # AB_METALS['CH4_main_iso']   = -4.5
 # AB_METALS['CO2_main_iso']   = -4.2
 
