@@ -10,7 +10,7 @@ import scipy.constants as cst
 from doubleRetrieval.util import save_1d_data
 
 NAME = 'spectrum'
-VERSION = '01'
+VERSION = '02'
 NAME += '_v' + VERSION
 
 MODEL = 'free'  # 'free' or 'chem_equ'
