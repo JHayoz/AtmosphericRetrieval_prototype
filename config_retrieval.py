@@ -14,7 +14,7 @@ MODEL = 'free'  # 'free' or 'chem_equ'
 MACHINE = 'bluesky'
 
 NUMBER = ''
-RETRIEVAL_NAME_INPUT = 'spectrum_v01'
+RETRIEVAL_NAME_INPUT = 'spectrum_v02'
 VERSION = '01'
 if MODEL == 'free':
     VERSION += '_free'

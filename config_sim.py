@@ -96,7 +96,7 @@ DATA_PARAMS.update(AB_METALS)
 DATA_PARAMS.update(CLOUDS_PARAMS)
 DATA_PARAMS.update(PHYSICAL_PARAMS)
 
-WINDOW_LENGTH_LBL = 60  # now referring to the length of the window for the only gaussian filter, for sinfoni data
+WINDOW_LENGTH_LBL = 20  # now referring to the length of the window for the only gaussian filter, for sinfoni data
 WINDOW_LENGTH_CK = 41
 
 RV = 31
