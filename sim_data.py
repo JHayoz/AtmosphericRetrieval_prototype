@@ -39,8 +39,8 @@ print('Config file copied')
 # redesign how to call data object for simulation
 # idea: import real data, and copy format
 
-resolution = 5000
-wlen_borders = [2,4]
+resolution = RESOLUTION
+wlen_borders = WLEN_BORDERS
 stepsize = (wlen_borders[0]+wlen_borders[1])/2/resolution
 N_points = int((wlen_borders[1]-wlen_borders[0])/stepsize)
 wlen_data = np.linspace(wlen_borders[0],wlen_borders[1],N_points)

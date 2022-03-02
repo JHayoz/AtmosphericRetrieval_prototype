@@ -26,7 +26,7 @@ USER_FOLDER = '/Projects/student_project/fabian/'
 IPAGATE_ROUTE = '/home/' + USER + USER_FOLDER
 INPUT_DIR = IPAGATE_ROUTE + RETRIEVAL_NAME_INPUT
 
-OUTPUT_DIR = '/scratch/'
+OUTPUT_DIR = '/scratch/' + USER + '/RunningJobs/'
 OUTPUT_DIR += RETRIEVAL_NAME + '_' + VERSION + '/'
 
 SIM_DATA_DIR = INPUT_DIR
@@ -122,9 +122,9 @@ DATA_PARAMS['R'] = 1.36
 DATA_PARAMS['log_gravity'] = 4.35
 DATA_PARAMS['P0'] = 2
 
-# DATA_PARAMS['H2O_main_iso']   = -2.51
-DATA_PARAMS['C/O'] = 0.44
-DATA_PARAMS['FeHs'] = -1
+DATA_PARAMS['H2O_main_iso']   = -2.4
+#DATA_PARAMS['C/O'] = 0.44
+#DATA_PARAMS['FeHs'] = 0.66
 
 # DATA_PARAMS['kzz'] = 7.5
 # DATA_PARAMS['fsed'] = 2
