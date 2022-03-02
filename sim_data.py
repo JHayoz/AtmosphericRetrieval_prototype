@@ -39,7 +39,7 @@ print('Config file copied')
 # redesign how to call data object for simulation
 # idea: import real data, and copy format
 
-resolution = 4000
+resolution = 5000
 wlen_borders = [2,4]
 stepsize = (wlen_borders[0]+wlen_borders[1])/2/resolution
 N_points = int((wlen_borders[1]-wlen_borders[0])/stepsize)
@@ -100,3 +100,14 @@ for key in instruments.keys():
                                                                                      wlen_after=wlen_after)
 
 save_spectra(CC_wlen_removed, CC_flux_removed, save_dir=OUTPUT_DIR + '/CC_spectrum', save_name='')
+plot_data(config=CONFIG_DICT,
+              CC_wlen = CC_wlen_removed,
+              CC_flux = CC_flux_removed,
+              CC_wlen_w_cont = CC_wlen_rebin,
+              CC_flux_w_cont = CC_flux_rebin,
+              sgfilter = sgfilter,
+              inset_plot = False,
+              output_file = OUTPUT_DIR,
+              plot_name='plot',
+              title = 'Spectrum',
+              fontsize=15)
