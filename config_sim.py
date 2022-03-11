@@ -13,7 +13,7 @@ NAME = 'spectrum'
 VERSION = '02'
 NAME += '_v' + VERSION
 
-MODEL = 'free'  # 'free' or 'chem_equ'
+MODEL = 'free'  # 'free' or 'chem_equ' or 'fabian'
 OUTPUT_FORMAT = 'datalike'  # determines whether output has same bins as data ('datalike') or if it still contains its extensions
 INSTRUMENT = 'SINFONI'
 
